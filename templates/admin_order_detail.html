@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Order #{{ order.id }} | Happy Days Cakes N More{% endblock %}
+{% block content %}
+<section class="section shell narrow admin-shell">
+    <div class="section-head compact"><div><span class="eyebrow">ORDER DETAILS</span><h1>#{{ order.id }}</h1><p>Review the customer request and update fulfilment status.</p></div><a class="btn btn-dark" href="{{ url_for('admin_orders') }}">← All orders</a></div>
+    <div class="detail-grid">
+        <div class="detail-card"><span class="eyebrow">CUSTOMER</span><h2>{{ order.customer_name }}</h2><p>{{ order.customer_email }}</p><p><strong>Phone:</strong> {{ order.customer_phone or 'Not provided' }}</p><p><strong>Order type:</strong> {{ order.order_type|title }}</p>{% if order.delivery_address %}<p><strong>Address:</strong><br>{{ order.delivery_address }}</p>{% endif %}{% if order.notes %}<p><strong>Notes:</strong><br>{{ order.notes }}</p>{% endif %}</div>
+        <div class="detail-card"><span class="eyebrow">PAYMENT & STATUS</span><h2>₹{{ "%.2f"|format(order.total_amount) }}</h2><p><strong>Payment:</strong> {{ order.payment_method|replace('_',' ')|title }}</p><p><strong>Payment status:</strong> {{ order.payment_status }}</p><p><strong>Placed:</strong> {{ order.created_at }}</p><form method="POST" action="{{ url_for('admin_update_order_status', order_id=order.id) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><div class="field-grid"><label>Order status<select name="status">{% for s in ['Placed','Processing','Ready','Shipped','Delivered','Cancelled'] %}<option value="{{ s }}" {% if order.status == s %}selected{% endif %}>{{ s }}</option>{% endfor %}</select></label><label>Payment status<select name="payment_status">{% for s in ['Unpaid','Pending','Paid','Refunded'] %}<option value="{{ s }}" {% if order.payment_status == s %}selected{% endif %}>{{ s }}</option>{% endfor %}</select></label></div><button style="margin-left: 30%;" class="btn btn-primary" type="submit">Save status</button></form></div>
+    </div>
+    <div class="admin-section-head"><div><span class="eyebrow">ITEMS</span><h2>Order summary</h2></div></div>
+    <div class="table-wrap"><table><thead><tr><th>Product</th><th>Quantity</th><th>Subtotal</th></tr></thead><tbody>{% for item in items %}<tr><td>{{ item.product_name }}</td><td>{{ item.quantity }}</td><td>₹{{ "%.2f"|format(item.subtotal) }}</td></tr>{% else %}<tr><td colspan="3" class="table-empty">No items.</td></tr>{% endfor %}</tbody></table></div>
+</section>
+{% endblock %}

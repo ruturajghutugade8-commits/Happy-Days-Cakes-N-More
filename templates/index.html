@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Happy Days Cakes N More | Cafe • Cakes • Moments{% endblock %}
+{% block content %}
+<section class="hero shell">
+    <div class="hero-copy">
+        <span class="eyebrow">CAFE • CAKES • MOMENTS</span>
+        <h1>Made fresh.<br><em>Served beautifully.</em></h1>
+        <p>Discover handcrafted cakes and café favourites made for slow mornings, quick breaks and celebrations worth remembering.</p>
+        <div class="hero-actions">
+            <a class="btn btn-primary" href="#menu">Explore the menu <span>→</span></a>
+            <a class="btn btn-primary" href="{{ url_for('cart') }}">View cart</a>
+        </div>
+        <div class="hero-trust"><span>✓ Freshly made</span><span>✓ Easy ordering</span><span>✓ Pickup & delivery</span></div>
+    </div>
+    <div class="hero-card">
+        <div class="hero-card-image"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=900&q=80" alt="Fresh café dessert" fetchpriority="high"></div>
+        <div class="hero-card-meta"><span>Today’s pick</span><strong>Butterscotch Cake</strong><b>₹499</b></div>
+    </div>
+</section>
+
+<section class="section shell" id="menu">
+    <div class="section-head">
+        <div><span class="eyebrow">OUR MENU</span><h2 >Something for every craving. </h2></div>
+    </div>
+    <div class="category-row">
+        <a class="category-chip {% if not selected_category %}active{% endif %}" href="{{ url_for('home') }}#menu">All</a>
+        {% for c in categories %}
+            <a class="category-chip {% if selected_category == c.category %}active{% endif %}" href="{{ url_for('home', category=c.category) }}#menu">{{ c.category }}</a>
+        {% endfor %}
+    </div>
+    <div class="product-grid">
+        {% for p in products %}
+        <article class="product-card">
+            <div class="product-image-wrap">
+                <img class="product-image" src="{{ p.image }}" alt="{{ p.name }}" loading="lazy" decoding="async">
+                <span class="product-tag">{{ p.category or 'Special' }}</span>
+            </div>
+            <div class="product-body">
+                <div class="product-title-row"><h3>{{ p.name }}</h3><span class="price">₹{{ "%.2f"|format(p.price) }}</span></div>
+                <p>{{ p.description }}</p>
+                <form method="POST" action="{{ url_for('add_to_cart', product_id=p.id) }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button class="btn btn-dark btn-full" type="submit">Add to cart <span>+</span></button>
+                </form>
+            </div>
+        </article>
+        {% else %}
+            <div class="empty-state"><h3>No items in this category yet.</h3><p>Check another category or ask the café admin to add products.</p></div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="value-strip">
+    <div class="shell value-grid">
+        <div><span class="value-icon">01</span><div><strong>Fresh by design</strong><p>Simple, focused menu presentation.</p></div></div>
+        <div><span class="value-icon">02</span><div><strong>Order in minutes</strong><p>Cart, checkout and order tracking.</p></div></div>
+        <div><span class="value-icon">03</span><div><strong>Built for the café</strong><p>Admin controls for daily operations.</p></div></div>
+    </div>
+</section>
+{% endblock %}

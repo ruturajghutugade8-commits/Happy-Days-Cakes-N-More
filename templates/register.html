@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Create Account | Happy Days Cakes N More{% endblock %}
+{% block content %}
+<section class="auth-shell shell">
+    <div class="auth-panel"><span class="eyebrow">JOIN Happy Days Cakes N More</span><h1>Your next favourite order starts here.</h1><p>Create an account to place orders and view your order history in one place.</p></div>
+    <div class="form-card auth-card"><h2>Create account</h2><p class="muted">Use at least 8 characters for your password.</p>
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <label>Full name<input type="text" name="name" placeholder="Your name" maxlength="100" autocomplete="name" required></label>
+            <label>Email<input type="email" name="email" placeholder="you@example.com" autocomplete="email" required></label>
+            <label>Password<input type="password" name="password" placeholder="8+ characters" minlength="8" autocomplete="new-password" required></label>
+            <button class="btn btn-primary btn-full" type="submit">Create account</button>
+        </form>
+        <p class="form-footnote">Already registered? <a href="{{ url_for('login') }}">Login</a></p>
+    </div>
+</section>
+{% endblock %}

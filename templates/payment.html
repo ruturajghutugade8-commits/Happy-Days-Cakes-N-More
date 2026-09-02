@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+
+{% block title %}Secure Payment | Happy Days Cakes N More{% endblock %}
+
+{% block content %}
+
+<section
+    class="empty-state shell payment-state"
+    id="payment-page"
+
+    data-razorpay-key="{{ razorpay_key_id }}"
+    data-razorpay-order="{{ razorpay_order_id }}"
+    data-order-id="{{ order_id }}"
+    data-amount="{{ amount }}"
+    data-customer-name="{{ customer_name | default('', true) }}"
+    data-payment-failed-url="{{ url_for('payment_failed', order_id=order_id) }}"
+>
+
+    <span class="eyebrow">
+        SECURE CHECKOUT
+    </span>
+
+    <h1>
+        Complete your payment.
+    </h1>
+
+    <p>
+        Order #{{ order_id }}
+        ·
+        ₹{{ "%.2f"|format(amount / 100) }}
+    </p>
+
+    <button
+        id="pay-button"
+        class="btn btn-primary"
+        type="button"
+    >
+        Pay ₹{{ "%.2f"|format(amount / 100) }}
+    </button>
+
+    <p class="form-footnote">
+        Payments are processed securely by Razorpay.
+    </p>
+
+    <form
+        id="payment-form"
+        method="POST"
+        action="{{ url_for('verify_payment') }}"
+    >
+
+        <input
+            type="hidden"
+            name="order_id"
+            value="{{ order_id }}"
+        >
+
+        <input
+            type="hidden"
+            name="razorpay_payment_id"
+            id="razorpay_payment_id"
+        >
+
+        <input
+            type="hidden"
+            name="razorpay_order_id"
+            id="razorpay_order_id"
+        >
+
+        <input
+            type="hidden"
+            name="razorpay_signature"
+            id="razorpay_signature"
+        >
+
+    </form>
+
+</section>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const paymentPage = document.getElementById("payment-page");
+    const payButton = document.getElementById("pay-button");
+    const paymentForm = document.getElementById("payment-form");
+
+    if (!paymentPage || !payButton || !paymentForm) {
+        console.error("Payment page elements are missing.");
+        return;
+    }
+
+    const razorpayKey = paymentPage.dataset.razorpayKey;
+    const razorpayOrderId = paymentPage.dataset.razorpayOrder;
+    const orderId = paymentPage.dataset.orderId;
+    const amount = Number(paymentPage.dataset.amount);
+    const customerName = paymentPage.dataset.customerName;
+    const paymentFailedUrl = paymentPage.dataset.paymentFailedUrl;
+
+    if (!razorpayKey) {
+        console.error("Razorpay key is missing.");
+        return;
+    }
+
+    if (!razorpayOrderId) {
+        console.error("Razorpay order ID is missing.");
+        return;
+    }
+
+    if (!amount || amount <= 0) {
+        console.error("Invalid payment amount.");
+        return;
+    }
+
+    payButton.addEventListener("click", function () {
+
+        payButton.disabled = true;
+        payButton.textContent = "Opening payment...";
+
+        const options = {
+
+            key: razorpayKey,
+
+            amount: amount,
+
+            currency: "INR",
+
+            name: "Happy Days Cakes N More",
+
+            description: "Happy Days Cakes N More Order #" + orderId,
+
+            order_id: razorpayOrderId,
+
+            prefill: {
+                name: customerName
+            },
+
+            theme: {
+                color: "#5a2630"
+            },
+
+            handler: function (response) {
+
+                document.getElementById(
+                    "razorpay_payment_id"
+                ).value = response.razorpay_payment_id;
+
+                document.getElementById(
+                    "razorpay_order_id"
+                ).value = response.razorpay_order_id;
+
+                document.getElementById(
+                    "razorpay_signature"
+                ).value = response.razorpay_signature;
+
+                paymentForm.submit();
+            },
+
+            modal: {
+
+                ondismiss: function () {
+
+                    window.location.href = paymentFailedUrl;
+                }
+            }
+        };
+
+        try {
+
+            const razorpay = new Razorpay(options);
+
+            razorpay.on(
+                "payment.failed",
+                function () {
+
+                    window.location.href = paymentFailedUrl;
+                }
+            );
+
+            razorpay.open();
+
+        } catch (error) {
+
+            console.error(
+                "Razorpay initialization failed:",
+                error
+            );
+
+            payButton.disabled = false;
+
+            payButton.textContent =
+                "Pay ₹" +
+                (amount / 100).toFixed(2);
+        }
+    });
+});
+</script>
+
+{% endblock %}

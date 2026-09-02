@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Orders | Happy Days Cakes N More{% endblock %}
+{% block content %}
+<section class="section shell admin-shell">
+    <div class="page-head"><div><span class="eyebrow">CAFE OPERATIONS</span><h1>Orders</h1><p>Track every order from placement to completion.</p></div></div>
+    <div class="admin-nav"><a href="{{ url_for('admin_dashboard') }}">Dashboard</a><a href="{{ url_for('admin_products') }}">Products</a><a class="active" href="{{ url_for('admin_orders') }}">Orders</a><a href="{{ url_for('admin_users') }}">Customers</a></div>
+    <div class="table-wrap"><table><thead><tr><th>Order</th><th>Customer</th><th>Total</th><th>Type</th><th>Payment</th><th>Status</th><th>Date</th><th></th></tr></thead><tbody>
+    {% for o in orders %}<tr><td>#{{ o.id }}</td><td><strong>{{ o.customer_name }}</strong><br><small>{{ o.customer_email }}</small></td><td>₹{{ "%.2f"|format(o.total_amount) }}</td><td>{{ o.order_type|title }}</td><td>{{ o.payment_status }}</td><td><span class="status">{{ o.status }}</span></td><td>{{ o.created_at }}</td><td><a class="table-link" href="{{ url_for('admin_order_detail', order_id=o.id) }}">Details →</a></td></tr>
+    {% else %}<tr><td colspan="8" class="table-empty">No orders found.</td></tr>{% endfor %}
+    </tbody></table></div>
+</section>
+{% endblock %}

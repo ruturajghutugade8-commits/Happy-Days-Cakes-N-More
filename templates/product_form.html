@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Edit' if product else 'Add' }} Product | Happy Days Cakes N More{% endblock %}
+{% block content %}
+<section class="section shell narrow">
+    <div class="section-head compact"><div><span class="eyebrow">CATALOGUE</span><h1>{{ 'Edit product' if product else 'Add product' }}</h1></div><a class="text-link" href="{{ url_for('admin_products') }}">← Back to products</a></div>
+    <div class="form-card">
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="field-grid"><label>Product name<input type="text" name="name" maxlength="150" value="{{ product.name if product else '' }}" required></label><label>Category<input type="text" name="category" maxlength="80" value="{{ product.category if product else 'Cakes' }}" placeholder="Cakes, Coffee, Desserts..."></label></div>
+            <label>Description<textarea name="description" maxlength="1000" placeholder="Short description">{{ product.description if product else '' }}</textarea></label>
+            <div class="field-grid"><label>Price (₹)<input type="number" name="price" step="0.01" min="1" value="{{ product.price if product else '' }}" required></label><label>Image URL<input type="url" name="image" maxlength="500" value="{{ product.image if product else '' }}" placeholder="https://..."></label></div>
+            <label class="check-row"><input type="checkbox" name="is_available" {% if not product or product.is_available %}checked{% endif %}> Show this product on the menu</label>
+            <button class="btn btn-primary" type="submit">Save product</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

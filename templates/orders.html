@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}My Orders | Happy Days Cakes N More{% endblock %}
+{% block content %}
+<section class="section shell narrow">
+    <div class="section-head compact"><div><span class="eyebrow">YOUR ACCOUNT</span><h1>My Orders</h1></div><a class="btn btn-dark" href="{{ url_for('home') }}#menu">Order again</a></div>
+    {% if orders %}
+    <div class="order-cards">
+        {% for o in orders %}
+        <article class="order-card"><div><span class="order-number">Order #{{ o.id }}</span><h3>₹{{ "%.2f"|format(o.total_amount) }}</h3><p>{{ o.created_at }}</p></div><div class="order-meta"><span class="status status-{{ o.status|lower|replace(' ', '-') }}">{{ o.status }}</span><span>{{ o.order_type|title }}</span><span>{{ o.payment_status }}</span></div></article>
+        {% endfor %}
+    </div>
+    {% else %}<div class="empty-state large"><span class="empty-icon">☕</span><h2>No orders yet</h2><p>Your placed orders will appear here.</p><a class="btn btn-primary" href="{{ url_for('home') }}#menu">Explore menu</a></div>{% endif %}
+</section>
+{% endblock %}

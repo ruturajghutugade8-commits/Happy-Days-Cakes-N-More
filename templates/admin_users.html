@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Customers | Happy Days Cakes N More{% endblock %}
+{% block content %}
+<section class="section shell admin-shell">
+    <div class="page-head"><div><span class="eyebrow">CUSTOMERS</span><h1>Customers</h1><p>View registered accounts and manage access.</p></div></div>
+    <div class="admin-nav"><a href="{{ url_for('admin_dashboard') }}">Dashboard</a><a href="{{ url_for('admin_products') }}">Products</a><a href="{{ url_for('admin_orders') }}">Orders</a><a class="active" href="{{ url_for('admin_users') }}">Customers</a></div>
+    <div class="table-wrap"><table><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Registered</th><th>Action</th></tr></thead><tbody>
+    {% for u in users %}<tr><td><strong>{{ u.name }}</strong></td><td>{{ u.email }}</td><td>{% if u.is_admin %}<span class="status status-admin">Admin</span>{% else %}Customer{% endif %}</td><td>{{ u.created_at }}</td><td>{% if u.id != session.get('user_id') %}<form method="POST" action="{{ url_for('admin_delete_user', user_id=u.id) }}" onsubmit="return confirm('Delete this user?')"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="danger" type="submit">Delete</button></form>{% else %}<span class="muted">Current account</span>{% endif %}</td></tr>
+    {% else %}<tr><td colspan="5" class="table-empty">No users found.</td></tr>{% endfor %}
+    </tbody></table></div>
+</section>
+{% endblock %}

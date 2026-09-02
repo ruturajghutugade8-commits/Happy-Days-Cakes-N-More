@@ -1,0 +1,3 @@
+{% extends "base.html" %}
+{% block title %}{{ code }} | Happy Days Cakes N More{% endblock %}
+{% block content %}<section class="empty-state error-state shell"><span class="eyebrow">ERROR {{ code }}</span><h1>Something went off the menu.</h1><p>{{ message }}</p><a class="btn btn-primary" href="{{ url_for('home') }}">Back to home</a></section>{% endblock %}

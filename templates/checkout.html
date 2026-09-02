@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Checkout | Happy Days Cakes N More{% endblock %}
+{% block content %}
+<section class="section shell narrow">
+    <div class="section-head compact"><div><span class="eyebrow">FINAL STEP</span><h1>Checkout</h1></div><a class="text-link" href="{{ url_for('cart') }}">← Back to cart</a></div>
+    <div class="checkout-layout">
+        <form class="form-card" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <h2>Order details</h2>
+            <p class="muted">We need these details to prepare and hand over your order.</p>
+            <label>Phone number<input type="tel" name="phone" placeholder="10-digit mobile number" required></label>
+            <div class="field-grid">
+                <label>Order type
+                    <select name="order_type" id="order-type" required>
+                        <option value="pickup">Pickup at café</option>
+                        <option value="delivery">Delivery</option>
+                    </select>
+                </label>
+                <label>Payment
+                    <select name="payment_method" required>
+                        <option value="pay_at_cafe">Pay at café</option>
+                        <option value="cash_on_delivery">Cash on delivery</option>
+                        {% if online_payment_enabled %}<option value="online">Online payment (Razorpay)</option>{% endif %}
+                    </select>
+                </label>
+            </div>
+            <label id="address-field" class="hidden">Delivery address<textarea name="delivery_address" placeholder="Full delivery address"></textarea></label>
+            <label>Special instructions <span class="optional">optional</span><textarea name="notes" maxlength="500" placeholder="Cake message, timing, preferences..."></textarea></label>
+            <button class="btn btn-primary btn-full" type="submit">Place order · ₹{{ "%.2f"|format(total) }}</button>
+            <p class="form-footnote">Online payment requires a configured payment gateway. If it is not enabled, choose Pay at café.</p>
+        </form>
+        <aside class="summary-card">
+            <span class="eyebrow">ORDER SUMMARY</span><h2>{{ items|length }} item{% if items|length != 1 %}s{% endif %}</h2>
+            {% for item in items %}<div class="summary-line"><span>{{ item[0] }} × {{ item[1] }}</span><span>₹{{ "%.2f"|format(item[2]) }}</span></div>{% endfor %}
+            <div class="summary-line total"><span>Total</span><strong>₹{{ "%.2f"|format(total) }}</strong></div>
+        </aside>
+    </div>
+</section>
+{% endblock %}
