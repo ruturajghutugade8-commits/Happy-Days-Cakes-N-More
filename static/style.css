@@ -1485,3 +1485,738 @@ tr:last-child td {
     font-size: 34px
   }
 }
+/* ================================
+   COMPLETE RESPONSIVE PATCH
+   Paste at the END of your CSS
+================================ */
+
+/* Large Tablets */
+@media (max-width: 1024px){
+
+  .shell{
+    width:94%;
+  }
+
+  .hero{
+    grid-template-columns:1fr;
+    gap:40px;
+    text-align:center;
+  }
+
+  .hero-copy p{
+    margin:auto;
+  }
+
+  .hero-actions,
+  .hero-trust{
+    justify-content:center;
+  }
+
+  .product-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .cart-layout,
+  .checkout-layout,
+  .auth-shell{
+    grid-template-columns:1fr;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .stat-wide{
+    grid-column:span 2;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .detail-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+/* Mobile */
+@media (max-width:768px){
+
+  .nav{
+    min-height:70px;
+    position:relative;
+  }
+
+  .nav-toggle{
+    display:block;
+  }
+
+  .navlinks{
+    display:none;
+    position:absolute;
+    top:70px;
+    left:0;
+    width:100%;
+    background:#2b1717;
+    flex-direction:column;
+    padding:15px;
+    z-index:999;
+  }
+
+  .navlinks.open{
+    display:flex;
+  }
+
+  .navlinks a{
+    width:100%;
+    padding:14px;
+  }
+
+  .brand strong{
+    font-size:18px;
+  }
+
+  .brand small{
+    display:none;
+  }
+
+  .brand-mark{
+    width:56px;
+    height:42px;
+    font-size:52px;
+  }
+
+  .hero{
+    padding:45px 0;
+  }
+
+  .hero h1{
+    font-size:42px;
+    line-height:1.1;
+  }
+
+  .hero-copy p{
+    font-size:15px;
+  }
+
+  .hero-actions{
+    flex-direction:column;
+    width:100%;
+  }
+
+  .hero-actions .btn,
+  .hero-actions .text-link{
+    width:100%;
+  }
+
+  .section{
+    padding:45px 0;
+  }
+
+  .section-head{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
+  }
+
+  .section-head p{
+    max-width:100%;
+  }
+
+  .value-grid{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+
+  .field-grid{
+    grid-template-columns:1fr;
+  }
+
+  .cart-item{
+    grid-template-columns:70px 1fr;
+    gap:12px;
+  }
+
+  .cart-item img{
+    width:70px;
+    height:70px;
+  }
+
+  .qty-form{
+    width:100%;
+  }
+
+  .qty{
+    flex:1;
+  }
+
+  .icon-btn{
+    justify-self:end;
+  }
+
+  .summary-card{
+    position:static;
+  }
+
+  .order-card{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .order-meta{
+    justify-content:flex-start;
+  }
+
+  .admin-welcome{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .admin-section-head{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  table{
+    min-width:650px;
+  }
+
+  .table-wrap{
+    overflow-x:auto;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr;
+    gap:28px;
+  }
+
+  .site-footer p{
+    max-width:100%;
+  }
+}
+
+/* Small Phones */
+@media (max-width:480px){
+
+  .shell{
+    width:92%;
+  }
+
+  .hero h1{
+    font-size:34px;
+  }
+
+  .hero-copy p{
+    font-size:14px;
+  }
+
+  .product-grid{
+    grid-template-columns:1fr;
+  }
+
+  .product-body{
+    padding:15px;
+  }
+
+  .product-body h3{
+    font-size:20px;
+  }
+
+  .price{
+    font-size:18px;
+  }
+
+  .form-card,
+  .summary-card,
+  .detail-card{
+    padding:18px;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .stat-wide{
+    grid-column:span 1;
+  }
+
+  .stat strong{
+    font-size:28px;
+  }
+
+  .order-card h3{
+    font-size:22px;
+  }
+
+  .empty-state.large{
+    padding:35px 18px;
+  }
+
+  .empty-state.large h2{
+    font-size:26px;
+  }
+
+  .btn{
+    width:100%;
+  }
+
+  select,
+  input,
+  textarea{
+    width:100%;
+  }
+}
+/* =========================================================
+   PREMIUM INSTAGRAM GALLERY
+========================================================= */
+
+.gallery-page {
+    padding: 80px 0 110px;
+}
+
+
+/* =========================================================
+   GALLERY HEADER
+========================================================= */
+
+.gallery-header {
+    max-width: 760px;
+    margin: 0 auto 55px;
+    text-align: center;
+}
+
+.gallery-header .eyebrow {
+    display: inline-block;
+    color: var(--accent-dark);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+}
+
+.gallery-header h1 {
+    margin: 15px 0 18px;
+
+    font-family: "Playfair Display", Georgia, serif;
+
+    font-size: clamp(42px, 5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -1.8px;
+
+    color: var(--ink);
+}
+
+.gallery-header h1 em {
+    display: block;
+
+    color: var(--wine);
+
+    font-style: normal;
+}
+
+.gallery-header p {
+    max-width: 560px;
+
+    margin: 0 auto 28px;
+
+    color: var(--muted);
+
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   INSTAGRAM BUTTON
+========================================================= */
+
+.instagram-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 12px 20px;
+
+    border: 1px solid #dfd0c1;
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, .75);
+
+    color: var(--wine);
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 900;
+
+    box-shadow:
+        0 8px 25px rgba(45, 27, 22, .05);
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        color .25s ease,
+        box-shadow .25s ease;
+}
+
+.instagram-btn span {
+    font-size: 20px;
+    line-height: 1;
+}
+
+.instagram-btn:hover {
+    transform: translateY(-3px);
+
+    background: var(--wine);
+
+    color: #fff;
+
+    box-shadow:
+        0 14px 30px rgba(90, 38, 48, .18);
+}
+
+
+/* =========================================================
+   INSTAGRAM GRID
+========================================================= */
+
+.instagram-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 22px;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   INSTAGRAM CARD
+========================================================= */
+
+.instagram-card {
+    position: relative;
+
+    width: 100%;
+    min-width: 0;
+
+    height: 550px;
+
+    overflow: hidden;
+
+    background: #fff;
+
+    border: 1px solid rgba(90, 38, 48, .10);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 25px rgba(45, 27, 22, .05),
+        0 20px 55px rgba(45, 27, 22, .06);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
+}
+
+.instagram-card:hover {
+    transform: translateY(-6px);
+
+    border-color: rgba(184, 137, 66, .30);
+
+    box-shadow:
+        0 12px 30px rgba(45, 27, 22, .08),
+        0 25px 65px rgba(45, 27, 22, .12);
+}
+
+
+/* =========================================================
+   INSTAGRAM EMBED
+========================================================= */
+
+.instagram-card .instagram-media {
+    width: 100% !important;
+
+    min-width: 0 !important;
+
+    max-width: 100% !important;
+
+    height: 550px !important;
+
+    margin: 0 !important;
+
+    border: 0 !important;
+
+    border-radius: 0 !important;
+
+    background: #fff !important;
+}
+
+
+/* Instagram generated iframe */
+
+.instagram-card iframe {
+    display: block;
+
+    width: 100% !important;
+
+    max-width: 100% !important;
+
+    border: 0 !important;
+}
+
+
+/* =========================================================
+   PREMIUM TOP LINE
+========================================================= */
+
+.instagram-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 3px;
+
+    z-index: 10;
+
+    background: linear-gradient(
+        90deg,
+        #5a2630,
+        #b88942,
+        #e7c98b,
+        #b88942,
+        #5a2630
+    );
+
+    opacity: .9;
+}
+
+
+/* =========================================================
+   BOTTOM CTA
+========================================================= */
+
+.gallery-bottom {
+    max-width: 700px;
+
+    margin: 75px auto 0;
+
+    padding: 48px 30px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.95),
+            rgba(251,246,238,.95)
+        );
+
+    border: 1px solid rgba(90, 38, 48, .10);
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 12px 35px rgba(45, 27, 22, .06),
+        0 25px 60px rgba(45, 27, 22, .05);
+}
+
+.gallery-handle {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: var(--accent-dark);
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.gallery-bottom h2 {
+    margin: 0 0 10px;
+
+    font-family: "Playfair Display", Georgia, serif;
+
+    font-size: 36px;
+
+    line-height: 1.15;
+
+    color: var(--ink);
+}
+
+.gallery-bottom p {
+    max-width: 500px;
+
+    margin: 0 auto 25px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   TABLET — 1100px
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .gallery-page {
+        padding: 65px 0 90px;
+    }
+
+    .instagram-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+
+        gap: 18px;
+    }
+
+    .instagram-card,
+    .instagram-card .instagram-media {
+        height: 530px !important;
+    }
+}
+
+
+/* =========================================================
+   TABLET — 850px
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .instagram-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 16px;
+    }
+
+    .instagram-card,
+    .instagram-card .instagram-media {
+        height: 520px !important;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE — 600px
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .gallery-page {
+        padding: 45px 0 65px;
+    }
+
+    .gallery-header {
+        margin-bottom: 35px;
+    }
+
+    .gallery-header h1 {
+        font-size: 38px;
+
+        letter-spacing: -1px;
+    }
+
+    .gallery-header p {
+        font-size: 14px;
+
+        line-height: 1.7;
+    }
+
+    .instagram-btn {
+        width: 100%;
+
+        max-width: 290px;
+    }
+
+    /*
+       IMPORTANT:
+       Keep 2 columns on mobile.
+       Cards will not become one-per-row.
+    */
+
+    .instagram-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 12px;
+    }
+
+    .instagram-card {
+        border-radius: 13px;
+
+        height: 560px;
+    }
+
+    .instagram-card .instagram-media {
+        height: 560px !important;
+    }
+
+    .gallery-bottom {
+        margin-top: 50px;
+
+        padding: 35px 20px;
+
+        border-radius: 17px;
+    }
+
+    .gallery-bottom h2 {
+        font-size: 29px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE — 400px
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .gallery-page {
+        padding-top: 35px;
+    }
+
+    .gallery-header h1 {
+        font-size: 32px;
+    }
+
+    .instagram-grid {
+        gap: 9px;
+    }
+
+    .instagram-card {
+        height: 500px;
+
+        border-radius: 11px;
+    }
+
+    .instagram-card .instagram-media {
+        height: 500px !important;
+    }
+
+    .gallery-bottom {
+        padding: 30px 16px;
+    }
+
+    .gallery-bottom h2 {
+        font-size: 25px;
+    }
+
+}

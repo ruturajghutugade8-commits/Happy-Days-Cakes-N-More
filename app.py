@@ -474,6 +474,9 @@ def payment_failed():
     flash("Payment was cancelled. Your order has not been confirmed.", "error")
     return redirect(url_for("cart"))
 
+@app.route("/gallery")
+def gallery():
+    return render_template("gallery.html")
 
 @app.route("/orders")
 def orders():

@@ -7,6 +7,9 @@
         <h1>Made fresh.<br><em>Served beautifully.</em></h1>
         <p>Discover handcrafted cakes and café favourites made for slow mornings, quick breaks and celebrations worth remembering.</p>
         <div class="hero-actions">
+            <button class="btn btn-primary" onclick="window.open('https://wa.me/918010048725?text=Hi%20Happy%20Days%20Cakes%20N%20More,%20I%20would%20like%20to%20place%20a%20customize%20order.', '_blank')">
+    Custom Order on WhatsApp
+</button>
             <a class="btn btn-primary" href="#menu">Explore the menu <span>→</span></a>
             <a class="btn btn-primary" href="{{ url_for('cart') }}">View cart</a>
         </div>
@@ -27,6 +30,7 @@
         {% for c in categories %}
             <a class="category-chip {% if selected_category == c.category %}active{% endif %}" href="{{ url_for('home', category=c.category) }}#menu">{{ c.category }}</a>
         {% endfor %}
+        <a class="category-chip {% if not selected_category %}active{% endif %}" href="{{ url_for('gallery') }}">View gallery</a>
     </div>
     <div class="product-grid">
         {% for p in products %}
